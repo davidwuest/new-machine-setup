@@ -4,6 +4,5 @@
 cd new-machine-setup
 ```
 ```
-chmod +x setup.sh
+chmod +x setup.sh telegraf.sh fail2ban.sh
 ```
-
