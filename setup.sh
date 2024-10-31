@@ -27,7 +27,7 @@ fi
 
 # Update and Upgrade System
 echo "Updating and upgrading the system..."
-sudo apt update -qq --show-progress && sudo apt upgrade -y -qq --show-progress
+sudo apt update -qq && sudo apt upgrade -y -qq
 
 # Create a New User and Assign Root Privileges
 echo "Creating a new user: $NEW_USER"
