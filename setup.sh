@@ -18,11 +18,6 @@ else
   TIMEZONE=${TIMEZONE:-Europe/Berlin}
   read -p "Enter hostname: " HOSTNAME
   read -p "Enter admin email for update notifications: " EMAIL
-  read -p "Enter test email address for mail check: " TEST_EMAIL
-  read -p "Enter email subject (default: Test Subject): " SUBJECT
-  SUBJECT=${SUBJECT:-Test Subject}
-  read -p "Enter email message (default: My message): " MESSAGE
-  MESSAGE=${MESSAGE:-My message}
 fi
 
 # Update and Upgrade System
@@ -72,8 +67,8 @@ echo "Installing mailutils for email notifications..."
 sudo apt install -y -qq mailutils
 
 # Test email
-echo "Sending test email to $TEST_EMAIL..."
-echo "$MESSAGE" | mail -s "$SUBJECT" $TEST_EMAIL
+echo "Sending test email to $EMAIL..."
+echo "This is a test email from $HOSTNAME" | mail -s "Test" $EMAIL
 
 # Enable Unattended Upgrades
 echo "Installing and configuring unattended-upgrades..."
