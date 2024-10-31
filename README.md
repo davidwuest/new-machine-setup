@@ -1,6 +1,9 @@
 # new-machine-setup
 
 ```
+git clone https://github.com/davidwuest/new-machine-setup.git
+```
+```
 cd new-machine-setup
 ```
 ```
