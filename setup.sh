@@ -27,7 +27,7 @@ fi
 
 # Update and Upgrade System
 echo "Updating and upgrading the system..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update -qq --show-progress && sudo apt upgrade -y -qq --show-progress
 
 # Create a New User and Assign Root Privileges
 echo "Creating a new user: $NEW_USER"
@@ -53,17 +53,6 @@ PubkeyAuthentication yes
 EOF
 sudo systemctl restart sshd
 
-# Display System IP Address
-echo "System IP address:"
-hostname -I
-
-# Copy SSH Key
-# echo "Copying SSH key for user '$NEW_USER'..."
-# ssh-copy-id -i $SSH_PUBLIC_KEY_PATH $NEW_USER@$SSH_SERVER_IP
-
-# Restart SSH Service
-# sudo systemctl restart sshd
-
 # Set Time Zone
 echo "Setting timezone to $TIMEZONE..."
 sudo timedatectl set-timezone $TIMEZONE
@@ -78,10 +67,9 @@ hostnamectl
 echo "Checking swap space..."
 swapon -s
 
-
 # Configure Email Notifications for Updates
 echo "Installing mailutils for email notifications..."
-sudo apt install -y mailutils
+sudo apt install -y -qq mailutils
 
 # Test email
 echo "Sending test email to $TEST_EMAIL..."
@@ -89,7 +77,7 @@ echo "$MESSAGE" | mail -s "$SUBJECT" $TEST_EMAIL
 
 # Enable Unattended Upgrades
 echo "Installing and configuring unattended-upgrades..."
-sudo apt install -y unattended-upgrades
+sudo apt install -y -qq unattended-upgrades
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 
 # Configure unattended-upgrades to send update notifications
@@ -103,6 +91,15 @@ EOF
 echo "Listing timers for unattended-upgrades..."
 systemctl list-timers apt-daily.timer
 
-# Reboot System
-echo "Setup complete. Rebooting system..."
-sudo systemctl reboot
+# Display System IP Address
+echo "System IP address:"
+hostname -I
+
+# Halt before reboot
+read -p "Setup complete. Do you want to reboot the system now? (y/n): " REBOOT_CONFIRM
+if [[ "$REBOOT_CONFIRM" == "y" || "$REBOOT_CONFIRM" == "Y" ]]; then
+  echo "Rebooting system..."
+  sudo systemctl reboot
+else
+  echo "Reboot canceled. You may reboot the system manually when ready."
+fi
