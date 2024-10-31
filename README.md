@@ -1,6 +1,4 @@
-# new-machine-setup
-
-A skript for setting up and new Linux machine.
+# A skript for setting up and new Linux machine.
 
 ```
 git clone https://github.com/davidwuest/new-machine-setup.git
