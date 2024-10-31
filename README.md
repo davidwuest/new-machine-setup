@@ -3,6 +3,9 @@
 ```
 git clone https://github.com/davidwuest/new-machine-setup.git
 ```
+or 
+```
+curl -LO https://raw.githubusercontent.com/davidwuest/new-machine-setup/refs/heads/main/setup.sh
 ```
 cd new-machine-setup
 ```
