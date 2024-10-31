@@ -58,11 +58,11 @@ echo "System IP address:"
 hostname -I
 
 # Copy SSH Key
-echo "Copying SSH key for user '$NEW_USER'..."
-ssh-copy-id -i $SSH_PUBLIC_KEY_PATH $NEW_USER@$SSH_SERVER_IP
+# echo "Copying SSH key for user '$NEW_USER'..."
+# ssh-copy-id -i $SSH_PUBLIC_KEY_PATH $NEW_USER@$SSH_SERVER_IP
 
 # Restart SSH Service
-sudo systemctl restart sshd
+# sudo systemctl restart sshd
 
 # Set Time Zone
 echo "Setting timezone to $TIMEZONE..."
